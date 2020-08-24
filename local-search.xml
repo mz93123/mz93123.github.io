@@ -22,5 +22,80 @@
   
   
   
+  <entry>
+    <title>Centos7上安装MySQL</title>
+    <link href="/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/"/>
+    <url>/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/</url>
+    
+    <content type="html"><![CDATA[<h2 id="阿里云Centos7上安装MySQL教程"><a href="#阿里云Centos7上安装MySQL教程" class="headerlink" title="阿里云Centos7上安装MySQL教程"></a>阿里云Centos7上安装MySQL教程</h2><p>1.查看系统是否安装了mysql软件</p><pre><code class="hljs vala"><span class="hljs-meta"># rpm -qa|grep -i mysql</span></code></pre><p>2.将已经安装过的软件卸载掉。注意：这样的卸载是不彻底，不过这里够用了</p><pre><code class="hljs autoit"><span class="hljs-meta"># yum remove <span class="hljs-string">&#x27;软件名&#x27;</span></span></code></pre><p>3.<code>CentOS 7</code>的<code>yum</code>源中默认是没有<code>mysql</code>的。所以，为了解决这个问题我们首先下载安装<code>mysql</code>的<code>repo</code>源。</p><pre><code class="hljs 1c"><span class="hljs-meta"># wget http:<span class="hljs-comment">//repo.mysql.com//mysql57-community-release-el7-7.noarch.rpm</span></span></code></pre><ol start="4"><li>安装<code>mysql</code>的<code>repo</code>源</li></ol><pre><code class="hljs css"># <span class="hljs-selector-tag">rpm</span> <span class="hljs-selector-tag">-ivh</span> <span class="hljs-selector-tag">mysql57-community-release-el7-7</span><span class="hljs-selector-class">.noarch</span><span class="hljs-selector-class">.rpm</span></code></pre><p>安装之后会获得<code>/etc/yum.repos.d/mysql-community.repo</code>和<code>/etc/yum.repos.d/mysql-community-source.repo</code>两个源，可以去相应的路径下查看一下。</p><p>5.开始安装</p><pre><code class="hljs vala"><span class="hljs-meta"># yum install mysql-server</span><span class="hljs-meta"># yum install mysql-devel</span><span class="hljs-meta"># yum install mysql</span><span class="hljs-meta"># rpm -qa | grep -i mysql</span></code></pre><p>6.服务开关操作</p><pre><code class="hljs vala"><span class="hljs-meta">#执行其中之一就可以</span><span class="hljs-meta"># service mysqld status     查看mysql当前的状态</span><span class="hljs-meta"># systemctl status mysqld</span><span class="hljs-meta"># service mysqld stop       停止mysql</span><span class="hljs-meta">#systemctl stop mysqld</span><span class="hljs-meta"># service mysqld restart    重启mysql</span><span class="hljs-meta">#systemctl restart mysqld</span><span class="hljs-meta"># service mysqld start      启动mysql</span><span class="hljs-meta"># systemctl start mysqld</span></code></pre><p>7.设置MySQL开机启动</p><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> systemctl <span class="hljs-built_in">enable</span> mysqld</span></code></pre><p>8.启动MySQL服务进程</p><pre><code class="hljs vala"><span class="hljs-meta"># systemctl start mysqld</span>或者<span class="hljs-meta"># service mysqld start</span></code></pre><h2 id="无法登录问题解决"><a href="#无法登录问题解决" class="headerlink" title="无法登录问题解决"></a>无法登录问题解决</h2><p><strong>1.在/etc/my.cnf文件中添加</strong><code>**skip-grant-tables。****这里注意一下：我的skip-grant-tables放到了文件最后**。</code></p><p><strong>skip-grant-tables：的作用就是跳过了mysql的用户验证</strong></p><p><strong>然后直接输入mysql，不需要带任何登录参数直接回车就可以登陆上数据库;</strong></p><p><strong>2.重启mysql，service mysqld restart，重启之后我们直接输入mysql即可进入mysql数据库，因为我们已经跳过了mysql数据库的用户验证。</strong></p><p><strong>进入数据库之后执行下面的命令</strong></p><pre><code class="hljs pgsql">mysql&gt; use mysql;mysql&gt; <span class="hljs-keyword">show</span> <span class="hljs-keyword">tables</span>;<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,authentication_string <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;<span class="hljs-keyword">update</span> mysql.<span class="hljs-keyword">user</span> <span class="hljs-keyword">set</span> authentication_string=<span class="hljs-keyword">password</span>(<span class="hljs-string">&#x27;your password&#x27;</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span>=<span class="hljs-string">&#x27;root&#x27;</span>;flush <span class="hljs-keyword">privileges</span>;<span class="hljs-keyword">exit</span></code></pre><p>3.<strong>恢复/etc/my.cnf文件</strong></p><p>恢复<code>/etc/my.cnf</code>，将<code>skip-grant-tables</code>删除或者注释掉。</p><p><strong>4.重启mysql，service mysqld restart</strong></p><p><strong>到此为止我们就解决了mysql安装之后登录不知道密码的问题。</strong></p><h2 id="MySql取消密码强度验证功能"><a href="#MySql取消密码强度验证功能" class="headerlink" title="MySql取消密码强度验证功能"></a>MySql取消密码强度验证功能</h2><blockquote><p>修改MySql配置文件（my.cnf）<br>一般情况下，MySql的配置文件 my.cnf 会在 /etc/ 目录下，如果没有，可以使用以下命令查找位置：<br>find / -name my.cnf<br>编辑配置文件：<br>vi /etc/my.cnf<br>在文件末尾添加以下内容：<br>plugin-load=validate_password.so<br>validate-password=OFF<br>保存退出</p></blockquote><p><img src="/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/1.png"></p><p>**重启MySQL： systemctl restart mysqld.service **</p><h2 id="重置密码问题"><a href="#重置密码问题" class="headerlink" title="重置密码问题"></a><strong>重置密码问题</strong></h2><p>下面顺便讲解一下这个问题：</p><p>安装完mysql 之后，登陆以后，不管运行任何命令，总是提示这个错误：</p><p>You must reset your password using <strong>ALTER USER</strong> statement before executing this statement</p><p>处理步骤为：依次执行下面三条代码。</p><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> <span class="hljs-keyword">PASSWORD</span> = <span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">&#x27;your new password&#x27;</span>);<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">PASSWORD</span> <span class="hljs-keyword">EXPIRE</span> <span class="hljs-keyword">NEVER</span>;<span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;</code></pre><p>这里要注意的是your new password 必须包含数字，字母包含大小写，标点符号。不然好像是不能通过的。</p><p>完成以上三步退出再登，使用新设置的密码就行了，以上除了 your new password 需要修改成新密码外，其他原样输入即可。</p><h2 id="解决远程客户端无法连接MySQL数据库"><a href="#解决远程客户端无法连接MySQL数据库" class="headerlink" title="解决远程客户端无法连接MySQL数据库"></a><strong>解决远程客户端无法连接MySQL数据库</strong></h2><p><strong>1.创建新的安全组规则，对外开放3306端口访问授权</strong></p><p><strong>2.在本机登入mysql后,更改 “mysql” 数据库里的 “user” 表里的 “host” 项,从”localhost”改称’%’。</strong></p><pre><code class="hljs routeros">mysql -u root -pmysql&gt;use mysql;mysql&gt;select host,user <span class="hljs-keyword">from</span> user;mysql&gt;update<span class="hljs-built_in"> user </span><span class="hljs-builtin-name">set</span> host = <span class="hljs-string">&#x27;%&#x27;</span> where<span class="hljs-built_in"> user </span>=<span class="hljs-string">&#x27;root&#x27;</span>;mysql&gt;flush privileges;mysql&gt;select host,user <span class="hljs-keyword">from</span> user;</code></pre><p>第一句是以权限用户root登录</p><p>第二句:选择mysql库</p><p>第三句:查看mysql库中的user表的host值(即可进行连接访问的主机/IP名称)</p><p>第四句:修改host值(以通配符%的内容增加主机/IP地址),当然也可以直接增加IP地址</p><p>第五句:刷新MySQL的系统权限相关表</p><p>第六句:再重新查看user表时,有修改</p><p>3.重起mysql服务即可完成。<strong>service mysqld restart</strong>。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CenteOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>centos安装MySQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>CentOS7关于网络的设置</title>
+    <link href="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/"/>
+    <url>/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<p>装好CentOS7后，我们一开始是上不了网的</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/1.png"></p><p>这时候，可以输入命令dhclient，可以自动获取一个IP地址，再用命令ip addr查看IP</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/2.png"></p><p>不过这时候获取的IP是动态的，下次重启系统后，IP地址也会变化，这时候我们可以把系统的IP设置为静态的，设置步骤如下：<br>（1）点击VMware虚拟机左上角的“编辑”，选择“虚拟网络编译器”。<br>（2）选中VMnet8（NAT模式），再点击右侧的“NAT设置”此时会看到如下界面</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/3.jpg"></p><p>（3）在命令行中输入：vim /etc/sysconfig/network-scripts/ifcfg-ens33</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/4.png"></p><p>（4）此时会进入如下图所示界面</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/5.png"></p><p>（5）将ONBOOT=no改为yes，将BOOTPROTO=dhcp改为BOOTPROTO=static,并在后面增加几行内容：<br>IPADDR=192.168.127.128<br>NETMASK=255.255.255.0<br>GATEWAY=192.168.127.2<br>DNS1=119.29.29.29</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/6.png"></p><p>（6）保存后退出，然后输入命令：systemctl restart network.service来重启网络服务。</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/7.png"></p><p>（7）再用ip addr查看IP,并用命令ping测试网络的连通性。</p><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/8.png"></p><h4 id="设置ip段必须在起始和结束范围之内"><a href="#设置ip段必须在起始和结束范围之内" class="headerlink" title="设置ip段必须在起始和结束范围之内"></a>设置ip段必须在起始和结束范围之内</h4><p><img src="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/9.png"></p><p>至此，IP即设置完毕。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CenteOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>centos网络的设置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>centos中安装python3.7</title>
+    <link href="/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/"/>
+    <url>/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/</url>
+    
+    <content type="html"><![CDATA[<h4 id="1、安装依赖-amp-下载python3-7"><a href="#1、安装依赖-amp-下载python3-7" class="headerlink" title="1、安装依赖&amp;下载python3.7"></a><strong>1、安装依赖&amp;下载python3.7</strong></h4><pre><code class="hljs apache"><span class="hljs-comment"># 1、yum更新yum源</span><span class="hljs-attribute">yum</span> update<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span><span class="hljs-attribute">yum</span> install zlib-devel bzip<span class="hljs-number">2</span>-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span><span class="hljs-attribute">wget</span> https://www.python.org/ftp/<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.tgz</code></pre><p><strong>2、安装Python</strong> </p><pre><code class="hljs awk"><span class="hljs-comment"># 1、yum更新yum源</span>yum update<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span>yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span>wget https:<span class="hljs-regexp">//</span>www.python.org<span class="hljs-regexp">/ftp/</span><span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz　　<span class="hljs-number">2</span>、安装Python<span class="hljs-comment"># 1、解压</span>tar -xvf Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz<span class="hljs-comment">#2、配置编译</span>cd Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.<span class="hljs-regexp">/configure --prefix=/u</span>sr<span class="hljs-regexp">/local/</span>python3  <span class="hljs-comment"># 配置编译的的路径（这里--prefix是指定编译安装的文件夹）</span>.<span class="hljs-regexp">/configure --enable-optimizations  # 执行该代码后，会编译安装到 /u</span>sr<span class="hljs-regexp">/local/</span>bin/ 下，且不用添加软连接或环境变量make &amp;&amp; make installln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python3  <span class="hljs-comment"># 添加软连接</span>ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/pip3 /u</span>sr<span class="hljs-regexp">/bin/</span>pip3<span class="hljs-comment">#3、将/usr/local/python3/bin加入PATH</span>[root@linux-node1 testProj]<span class="hljs-comment"># vim /etc/profile</span><span class="hljs-comment">#然后在文件末尾添加</span>export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin[root@linux-node1 testProj]<span class="hljs-comment"># source /etc/profile # 修改完后，还需要让这个环境变量在配置信息中生效，执行命令</span></code></pre><h4 id="3-创建python虚拟环境"><a href="#3-创建python虚拟环境" class="headerlink" title="3,创建python虚拟环境"></a>3,创建python虚拟环境</h4><pre><code class="hljs mel"><span class="hljs-number">1</span>、安装virtualenv　　　　　　yum install <span class="hljs-keyword">python</span>-virtualenv　　<span class="hljs-number">2</span>、创建<span class="hljs-keyword">python</span>虚拟环境　　　　　　virtualenv <span class="hljs-keyword">env</span>           # 执行后，在本地会生成一个与虚拟环境同名的文件夹　　　　　　如果你的系统里安装有不同版本的<span class="hljs-keyword">python</span>，可以使用--<span class="hljs-keyword">python</span>参数指定虚拟环境的<span class="hljs-keyword">python</span>版本：　　　　　　virtualenv --<span class="hljs-keyword">python</span>=/usr/local/python3/bin/python3 <span class="hljs-keyword">env</span>　　<span class="hljs-number">3</span>、启动虚拟环境　　　　　　　　　　<span class="hljs-keyword">source</span> bin/activate         # 启动虚拟环境　　　　　　deactivate                      # 退出虚拟环境</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>CenteOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>centos中安装python3.7</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
