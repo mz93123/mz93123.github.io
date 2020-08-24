@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Miao">
   <meta name="keywords" content="">
-  <title>centos中安装python3.7 见字如面</title>
+  <title>yum安装redis 见字如面</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                centos中安装python3.7
+                yum安装redis
               
             </span>
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2019-12-30 15:29" pubdate>
-      2019年12月30日 下午
+    <time datetime="2019-12-30 19:35" pubdate>
+      2019年12月30日 晚上
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      461 字
+      312 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      4
        分钟
     </span>
   
@@ -213,61 +213,59 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">centos中安装python3.7</h1>
+            <h1 style="display: none">yum安装redis</h1>
             
             <div class="markdown-body" id="post-body">
-              <h4 id="1、安装依赖-amp-下载python3-7"><a href="#1、安装依赖-amp-下载python3-7" class="headerlink" title="1、安装依赖&amp;下载python3.7"></a><strong>1、安装依赖&amp;下载python3.7</strong></h4><pre><code class="hljs apache"><span class="hljs-comment"># 1、yum更新yum源</span>
-<span class="hljs-attribute">yum</span> update
-<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span>
-<span class="hljs-attribute">yum</span> install zlib-devel bzip<span class="hljs-number">2</span>-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make
-<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span>
-<span class="hljs-attribute">wget</span> https://www.python.org/ftp/<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.tgz</code></pre>
+              <h4 id="阿里云Centos7-yum安装redis"><a href="#阿里云Centos7-yum安装redis" class="headerlink" title="阿里云Centos7 yum安装redis"></a>阿里云Centos7 yum安装redis</h4><h4 id="1-首先安装epel源"><a href="#1-首先安装epel源" class="headerlink" title="1.首先安装epel源"></a><strong>1.首先安装epel源</strong></h4><pre><code class="hljs sql">yum <span class="hljs-keyword">install</span> epel-<span class="hljs-keyword">release</span></code></pre>
 
-<p><strong>2、安装Python</strong> </p>
-<pre><code class="hljs awk"><span class="hljs-comment"># 1、yum更新yum源</span>
-yum update
-<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span>
-yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make
-<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span>
-wget https:<span class="hljs-regexp">//</span>www.python.org<span class="hljs-regexp">/ftp/</span><span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz
-　　<span class="hljs-number">2</span>、安装Python
+<h4 id="2-安装redis"><a href="#2-安装redis" class="headerlink" title="2.安装redis"></a><strong>2.安装redis</strong></h4><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> redis</code></pre>
 
-<span class="hljs-comment"># 1、解压</span>
-tar -xvf Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz
+<h4 id="3-安装完毕后，使用下面的命令启动redis服务"><a href="#3-安装完毕后，使用下面的命令启动redis服务" class="headerlink" title="3.安装完毕后，使用下面的命令启动redis服务"></a><strong>3.安装完毕后，使用下面的命令启动redis服务</strong></h4><pre><code class="hljs routeros"><span class="hljs-comment"># 启动redis</span>
+service redis start
+<span class="hljs-comment"># 停止redis</span>
+service redis stop
+<span class="hljs-comment"># 查看redis运行状态</span>
+service redis status
+<span class="hljs-comment"># 查看redis进程</span>
+ps -ef | grep redis</code></pre>
 
-<span class="hljs-comment">#2、配置编译</span>
-cd Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>
-.<span class="hljs-regexp">/configure --prefix=/u</span>sr<span class="hljs-regexp">/local/</span>python3  <span class="hljs-comment"># 配置编译的的路径（这里--prefix是指定编译安装的文件夹）</span>
-.<span class="hljs-regexp">/configure --enable-optimizations  # 执行该代码后，会编译安装到 /u</span>sr<span class="hljs-regexp">/local/</span>bin/ 下，且不用添加软连接或环境变量
-make &amp;&amp; make install
-ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python3  <span class="hljs-comment"># 添加软连接</span>
-ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/pip3 /u</span>sr<span class="hljs-regexp">/bin/</span>pip3
+<h4 id="4-设置redis为开机自动启动"><a href="#4-设置redis为开机自动启动" class="headerlink" title="4.设置redis为开机自动启动"></a><strong>4.设置redis为开机自动启动</strong></h4><pre><code class="hljs applescript">chkconfig redis <span class="hljs-keyword">on</span></code></pre>
 
-<span class="hljs-comment">#3、将/usr/local/python3/bin加入PATH</span>
-[root@linux-node1 testProj]<span class="hljs-comment"># vim /etc/profile</span>
-<span class="hljs-comment">#然后在文件末尾添加</span>
-export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin
+<h4 id="5-redis-cli进入redis服务"><a href="#5-redis-cli进入redis服务" class="headerlink" title="5.redis-cli进入redis服务"></a><strong>5.redis-cli进入redis服务</strong></h4><pre><code class="hljs vala"><span class="hljs-meta"># 进入本机redis</span>
+redis-cli
+<span class="hljs-meta"># 列出所有key</span>
+keys *</code></pre>
 
-[root@linux-node1 testProj]<span class="hljs-comment"># source /etc/profile # 修改完后，还需要让这个环境变量在配置信息中生效，执行命令</span></code></pre>
+<h4 id="6-打开配置文件，修改密码，IP等"><a href="#6-打开配置文件，修改密码，IP等" class="headerlink" title="6.打开配置文件，修改密码，IP等"></a><strong>6.打开配置文件，修改密码，IP等</strong></h4><pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>redis.conf</code></pre>
 
-<h4 id="3-创建python虚拟环境"><a href="#3-创建python虚拟环境" class="headerlink" title="3,创建python虚拟环境"></a>3,创建python虚拟环境</h4><pre><code class="hljs mel"><span class="hljs-number">1</span>、安装virtualenv
+<p>①可以修改端口（默认为6379）</p>
+<p><img src="/2019/12/30/yum%E5%AE%89%E8%A3%85redis/1.png" srcset="/img/loading.gif"></p>
+<p> ②可以修改密码</p>
+<p><img src="/2019/12/30/yum%E5%AE%89%E8%A3%85redis/2.png" srcset="/img/loading.gif"></p>
+<p>  ③可以修改允许远程登录 </p>
+<p>1.默认只允许本机登录</p>
+<pre><code class="hljs angelscript">bind <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span></code></pre>
 
-　　　　　　yum install <span class="hljs-keyword">python</span>-virtualenv
+<p>2.可以指定IP登录（指定ip，多个ip之间使用空格分隔）</p>
+<pre><code class="hljs angelscript">bind <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-number">192.168</span><span class="hljs-number">.3</span><span class="hljs-number">.3</span></code></pre>
 
-　　<span class="hljs-number">2</span>、创建<span class="hljs-keyword">python</span>虚拟环境
+<p><strong>3.允许所有IP登录（不安全）</strong></p>
+<pre><code class="hljs angelscript">bind <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span></code></pre>
 
-　　　　　　virtualenv <span class="hljs-keyword">env</span>           # 执行后，在本地会生成一个与虚拟环境同名的文件夹
+<h4 id="7-修改完配置文件后，可以通过如下命令使配置文件生效"><a href="#7-修改完配置文件后，可以通过如下命令使配置文件生效" class="headerlink" title="7.修改完配置文件后，可以通过如下命令使配置文件生效"></a>7.修改完配置文件后，可以通过如下命令使配置文件生效</h4><pre><code class="hljs awk">redis-server <span class="hljs-regexp">/etc/</span>redis.conf &amp;</code></pre>
 
-　　　　　　如果你的系统里安装有不同版本的<span class="hljs-keyword">python</span>，可以使用--<span class="hljs-keyword">python</span>参数指定虚拟环境的<span class="hljs-keyword">python</span>版本：
+<p>或者</p>
+<pre><code class="hljs routeros"><span class="hljs-comment"># 停止redis</span>
+service redis stop
+<span class="hljs-comment"># 启动redis</span>
+service redis start</code></pre>
 
-　　　　　　virtualenv --<span class="hljs-keyword">python</span>=/usr/local/python3/bin/python3 <span class="hljs-keyword">env</span>
+<h4 id="8-远程登录redis"><a href="#8-远程登录redis" class="headerlink" title="8.远程登录redis"></a>8.远程登录redis</h4><p>(其中127.0.0.1可以更改为远程公网IP)</p>
+<pre><code class="hljs angelscript">redis-cli -h <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> -p <span class="hljs-number">6379</span></code></pre>
 
-　　<span class="hljs-number">3</span>、启动虚拟环境　　　　
-
-　　　　　　<span class="hljs-keyword">source</span> bin/activate         # 启动虚拟环境
-
-　　　　　　deactivate                      # 退出虚拟环境</code></pre>
-
+<p>如果有密码，需要按如下图所示进行登录：</p>
+<p><img src="/2019/12/30/yum%E5%AE%89%E8%A3%85redis/3.png" srcset="/img/loading.gif"></p>
+<p>####9.在阿里云安全组添加6379端口</p>
 
             </div>
             <hr>
@@ -285,7 +283,7 @@ export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">centos中安装python3.7</a>
+                      <a class="hover-with-bg" href="/tags/centos%E4%B8%ADyum%E5%AE%89%E8%A3%85redis/">centos中yum安装redis</a>
                     
                   </div>
                 
@@ -296,15 +294,21 @@ export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/12/30/yum%E5%AE%89%E8%A3%85redis/">
+                      <a href="/2020/01/02/CentOS7%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">yum安装redis</span>
+                        <span class="hidden-mobile">CentOS7关于网络的设置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">
+                        <span class="hidden-mobile">centos中安装python3.7</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
