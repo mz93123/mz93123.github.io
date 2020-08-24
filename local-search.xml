@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>基于Docker安装关系型数据库PostgrelSQL替代Mysql</title>
+    <link href="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/"/>
+    <url>/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/</url>
+    
+    <content type="html"><![CDATA[<h4 id="拉取官方镜像，并创建容器"><a href="#拉取官方镜像，并创建容器" class="headerlink" title="拉取官方镜像，并创建容器"></a>拉取官方镜像，并创建容器</h4><pre><code class="hljs python">zhukeMacBook-Pro:~ zhou$ docker pull postgres  // 拉取官方镜像zhukeMacBook-Pro:~ zhou$ docker run --name postgres -e POSTGRES_PASSWORD=<span class="hljs-number">123456</span> -p <span class="hljs-number">5432</span>:<span class="hljs-number">5432</span> -d postgres  // 生成容器</code></pre><p>解释：<br><code>run </code>，创建并运行一个容器；</p><p><code>--name </code>，指定创建的容器的名字；</p><p><code>-e POSTGRES_PASSWORD=password </code>，设置环境变量，指定数据库的登录口令为<code>password</code>；</p><p><code>-p 5432:5432 </code>，端口映射将容器的5432端口映射到外部机器的5432端口；</p><p><code>-p 5432:5432-d  </code>，后台运行</p><p><code>postgres </code>，指定使用<code>postgres</code>作为镜像。</p><h4 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h4><pre><code class="hljs angelscript">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS                                            NAMES<span class="hljs-number">08f</span>294e43217        postgres            <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="hljs-number">5</span> minutes ago       Up <span class="hljs-number">5</span> minutes              <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">5432</span>-&gt;<span class="hljs-number">5432</span>/tcp                           postgres</code></pre><p>关键点： 可能有一些坑，最重要的一点是docker命令中参数的顺序。</p><p>例如端口映射的<code>-p 5432:5432</code>的位置如果过于靠后，则会导致映射失败。</p><h4 id="拉取postgresql可视化工具pgadmin4"><a href="#拉取postgresql可视化工具pgadmin4" class="headerlink" title="拉取postgresql可视化工具pgadmin4"></a>拉取postgresql可视化工具pgadmin4</h4><pre><code class="hljs python">docker pull dpage/pgadmin4</code></pre><p>运行pgadmin4：</p><pre><code class="hljs python">docker run -d -p <span class="hljs-number">5433</span>:<span class="hljs-number">80</span> --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@<span class="hljs-number">123.</span>com -e PGADMIN_DEFAULT_PASSWORD=<span class="hljs-number">123456</span> dpage/pgadmin4</code></pre><h4 id="查看服务"><a href="#查看服务" class="headerlink" title="查看服务"></a>查看服务</h4><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/1.png"></p><h4 id="打开浏览器访问pgadmin4：http-ip-5433-如图"><a href="#打开浏览器访问pgadmin4：http-ip-5433-如图" class="headerlink" title="打开浏览器访问pgadmin4：http://ip:5433/ 如图"></a>打开浏览器访问pgadmin4：<a href="http://localhost:5433/">http://ip:5433/</a> 如图</h4><p><code>-输入我们设置的邮箱test@123.com和密码123456，点击Login</code> </p><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/2.png"></p><p> 连接server：</p><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/3.png"></p><p> 链接配置</p><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/4.png"></p><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/5.png"></p><p> 提示无法解析,其实宿主机的hosts文件里host.docker.internal对应的还是容器IP </p><p>那你用postgres那个容器的IP去连 </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>PostgrelSQL</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>华谊兄弟电影世界</title>
     <link href="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/"/>
     <url>/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/</url>

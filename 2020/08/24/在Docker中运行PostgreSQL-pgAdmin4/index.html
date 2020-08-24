@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Miao">
   <meta name="keywords" content="">
-  <title>华谊兄弟电影世界 见字如面</title>
+  <title>基于Docker安装关系型数据库PostgrelSQL替代Mysql 见字如面</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                华谊兄弟电影世界
+                基于Docker安装关系型数据库PostgrelSQL替代Mysql
               
             </span>
 
@@ -162,8 +162,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-04 21:27" pubdate>
-      2020年8月4日 晚上
+    <time datetime="2020-08-24 15:35" pubdate>
+      2020年8月24日 下午
     </time>
   </div>
 
@@ -173,7 +173,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4 字
+      324 字
     </span>
   
 
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -213,23 +213,57 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">华谊兄弟电影世界</h1>
+            <h1 style="display: none">基于Docker安装关系型数据库PostgrelSQL替代Mysql</h1>
             
             <div class="markdown-body" id="post-body">
-              <center>憨憨和derder</center>
+              <h4 id="拉取官方镜像，并创建容器"><a href="#拉取官方镜像，并创建容器" class="headerlink" title="拉取官方镜像，并创建容器"></a>拉取官方镜像，并创建容器</h4><pre><code class="hljs python">zhukeMacBook-Pro:~ zhou$ docker pull postgres  // 拉取官方镜像
 
-<p><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/1.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/2.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/3.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/4.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/5.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/6.jpg" srcset="/img/loading.gif"><img src="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/7.jpg" srcset="/img/loading.gif"></p>
+zhukeMacBook-Pro:~ zhou$ docker run --name postgres -e POSTGRES_PASSWORD=<span class="hljs-number">123456</span> -p <span class="hljs-number">5432</span>:<span class="hljs-number">5432</span> -d postgres  // 生成容器</code></pre>
+
+<p>解释：<br><code>run </code>，创建并运行一个容器；</p>
+<p><code>--name </code>，指定创建的容器的名字；</p>
+<p><code>-e POSTGRES_PASSWORD=password </code>，设置环境变量，指定数据库的登录口令为<code>password</code>；</p>
+<p><code>-p 5432:5432 </code>，端口映射将容器的5432端口映射到外部机器的5432端口；</p>
+<p><code>-p 5432:5432-d  </code>，后台运行</p>
+<p><code>postgres </code>，指定使用<code>postgres</code>作为镜像。</p>
+<h4 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h4><pre><code class="hljs angelscript">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS                                            NAMES
+<span class="hljs-number">08f</span>294e43217        postgres            <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   <span class="hljs-number">5</span> minutes ago       Up <span class="hljs-number">5</span> minutes              <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">5432</span>-&gt;<span class="hljs-number">5432</span>/tcp                           postgres</code></pre>
+
+<p>关键点： 可能有一些坑，最重要的一点是docker命令中参数的顺序。</p>
+<p>例如端口映射的<code>-p 5432:5432</code>的位置如果过于靠后，则会导致映射失败。</p>
+<h4 id="拉取postgresql可视化工具pgadmin4"><a href="#拉取postgresql可视化工具pgadmin4" class="headerlink" title="拉取postgresql可视化工具pgadmin4"></a>拉取postgresql可视化工具pgadmin4</h4><pre><code class="hljs python">docker pull dpage/pgadmin4</code></pre>
+
+<p>运行pgadmin4：</p>
+<pre><code class="hljs python">docker run -d -p <span class="hljs-number">5433</span>:<span class="hljs-number">80</span> --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@<span class="hljs-number">123.</span>com -e PGADMIN_DEFAULT_PASSWORD=<span class="hljs-number">123456</span> dpage/pgadmin4</code></pre>
+
+<h4 id="查看服务"><a href="#查看服务" class="headerlink" title="查看服务"></a>查看服务</h4><p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/1.png" srcset="/img/loading.gif"></p>
+<h4 id="打开浏览器访问pgadmin4：http-ip-5433-如图"><a href="#打开浏览器访问pgadmin4：http-ip-5433-如图" class="headerlink" title="打开浏览器访问pgadmin4：http://ip:5433/ 如图"></a>打开浏览器访问pgadmin4：<a target="_blank" rel="noopener" href="http://localhost:5433/">http://ip:5433/</a> 如图</h4><p><code>-输入我们设置的邮箱test@123.com和密码123456，点击Login</code> </p>
+<p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/2.png" srcset="/img/loading.gif"></p>
+<p> 连接server：</p>
+<p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/3.png" srcset="/img/loading.gif"></p>
+<p> 链接配置</p>
+<p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/4.png" srcset="/img/loading.gif"></p>
+<p><img src="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/5.png" srcset="/img/loading.gif"></p>
+<p> 提示无法解析,其实宿主机的hosts文件里host.docker.internal对应的还是容器IP </p>
+<p>那你用postgres那个容器的IP去连 </p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PostgrelSQL/">PostgrelSQL</a>
+                    
+                  </div>
+                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
                     
                   </div>
                 
@@ -240,18 +274,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/24/%E5%9C%A8Docker%E4%B8%AD%E8%BF%90%E8%A1%8CPostgreSQL-pgAdmin4/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">基于Docker安装关系型数据库PostgrelSQL替代Mysql</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/03/04/DockerCompose%E8%AF%A6%E8%A7%A3/">
-                        <span class="hidden-mobile">DockerCompose详解</span>
+                      <a href="/2020/08/04/%E5%8D%8E%E8%B0%8A%E5%85%84%E5%BC%9F%E7%94%B5%E5%BD%B1%E4%B8%96%E7%95%8C/">
+                        <span class="hidden-mobile">华谊兄弟电影世界</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
