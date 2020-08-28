@@ -463,6 +463,113 @@ Docker 是应用最广泛的开源容器引擎，让开发者可以打包他们�
   <div class="row mx-auto index-card">
     
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/01/11/Python%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/">Python项目生成所有依赖包的清单requirements文件</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/11/Python%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/">
+          
+          
+            
+          
+          为当前的Python项目生成所有依赖包的清单requirements .txt文件生成所有依赖清单requirements.txt这里需要使用到的工具叫pipreqs,先安装:
+pip install pipreqs 
+
+装好之后cmd到项目路径下:
+pipreqs ./
+
+搞定~但是发现可能会有个别包漏掉,还得手工再解决一下,不过至少大头的依赖都已经列出来了
+使用requirements.txt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-11 09:36" pubdate>
+              2020-01-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/">Python生成所有依赖包的清单requirements文件</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/01/11/Centeos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" target="_self">
+          <img src="/cover/python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83.jpg" srcset="/img/loading.gif" alt="Centeos创建python虚拟环境">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        <a href="/2020/01/11/Centeos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Centeos创建python虚拟环境</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/01/11/Centeos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
+          
+          
+            
+          
+          virtualenv是一个可以在同一计算机中隔离多个python版本的工具。有时，两个不同的项目可能需要不同版本的python，如 python2.7 / python3.6 ，但是如果都装到一起，经常会导致问题。virtualenv能够用于创建独立的Python虚拟环境，多个Python相互独立，互不影响。virtualenvwrapper这个软件包可以让我们管理虚拟环境变得更加简单。不用再跑到
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-11 08:45" pubdate>
+              2020-01-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CenteOS/">CenteOS</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/centos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">centos创建python虚拟环境</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/" target="_self">
           <img src="/cover/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL.jpg" srcset="/img/loading.gif" alt="Centos7上安装MySQL">
@@ -641,63 +748,19 @@ service redis sta
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/" target="_self">
-          <img src="/cover/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7.jpg" srcset="/img/loading.gif" alt="centos中安装python3.7">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">centos中安装python3.7</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/12/30/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">
-          
-          
-            
-          
-          1、安装依赖&amp;下载python3.7# 1、yum更新yum源
-yum update
-# 2、安装Python 3.7所需的依赖否则安装后没有pip3包
-yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc ma
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-30 15:29" pubdate>
-              2019-12-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CenteOS/">CenteOS</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">centos中安装python3.7</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
 
 
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

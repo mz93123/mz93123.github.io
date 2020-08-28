@@ -129,6 +129,56 @@
   
   
   <entry>
+    <title>Python项目生成所有依赖包的清单requirements文件</title>
+    <link href="/2020/01/11/Python%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/"/>
+    <url>/2020/01/11/Python%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="为当前的Python项目生成所有依赖包的清单requirements-txt文件"><a href="#为当前的Python项目生成所有依赖包的清单requirements-txt文件" class="headerlink" title="为当前的Python项目生成所有依赖包的清单requirements .txt文件"></a>为当前的Python项目生成所有依赖包的清单requirements .txt文件</h2><h4 id="生成所有依赖清单requirements-txt"><a href="#生成所有依赖清单requirements-txt" class="headerlink" title="生成所有依赖清单requirements.txt"></a>生成所有依赖清单requirements.txt</h4><p>这里需要使用到的工具叫pipreqs,先安装:</p><pre><code class="hljs python">pip install pipreqs </code></pre><p>装好之后cmd到项目路径下:</p><pre><code class="hljs python">pipreqs ./</code></pre><p>搞定~但是发现可能会有个别包漏掉,还得手工再解决一下,不过至少大头的依赖都已经列出来了</p><h4 id="使用requirements-txt自动安装所有依赖包"><a href="#使用requirements-txt自动安装所有依赖包" class="headerlink" title="使用requirements.txt自动安装所有依赖包"></a>使用requirements.txt自动安装所有依赖包</h4><p>一条命令全搞定</p><pre><code class="hljs python">pip install -r requirements.txt</code></pre><h2 id="为当前的Python当前环境生成所有依赖包的清单requirements-txt文件"><a href="#为当前的Python当前环境生成所有依赖包的清单requirements-txt文件" class="headerlink" title="为当前的Python当前环境生成所有依赖包的清单requirements .txt文件"></a>为当前的Python当前环境生成所有依赖包的清单requirements .txt文件</h2><pre><code class="hljs pgsql">生成requirements.txt文件pip <span class="hljs-keyword">freeze</span> &gt; requirements.txt安装requirements.txt依赖pipinstall-r requirements.txt</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python生成所有依赖包的清单requirements文件</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Centeos创建python虚拟环境</title>
+    <link href="/2020/01/11/Centeos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"/>
+    <url>/2020/01/11/Centeos%E5%88%9B%E5%BB%BApython%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<p>virtualenv是一个可以在同一计算机中隔离多个python版本的工具。有时，两个不同的项目可能需要不同版本的python，如 python2.7 / python3.6 ，但是如果都装到一起，经常会导致问题。virtualenv能够用于创建独立的Python虚拟环境，多个Python相互独立，互不影响。<br>virtualenvwrapper这个软件包可以让我们管理虚拟环境变得更加简单。不用再跑到某个目录下通过virtualenv来创建虚拟环境，并且激活的时候也要跑到具体的目录下去激活。</p><p>下面介绍安装python虚拟环境的方法：</p><p>使用pip安装包前，先更新pip。</p><pre><code class="hljs vala"><span class="hljs-meta"># pip3 install --upgrade pip</span></code></pre><p><strong>1. 安装virtualenv、virtualenvwrapper</strong></p><pre><code class="hljs vala"><span class="hljs-meta"># pip3 install virtualenv</span><span class="hljs-meta"># pip3 install virtualenvwrapper</span></code></pre><p><strong>2. 进入.bashrc文件中，定义virtualenvwrapper路径</strong></p><p>使用vim编辑.bashrc文件</p><pre><code class="hljs vala"><span class="hljs-meta"># vim ~/.bashrc</span></code></pre><p>在文末填入以下代码并保存</p><pre><code class="hljs awk">VIRTUALENVWRAPPER_PYTHON=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin/python3    <span class="hljs-comment"># 指定virtualenvwrapper执行的python版本</span>export WORKON_HOME=<span class="hljs-variable">$HOME</span>/.virtualenvs    <span class="hljs-comment"># 指定虚拟环境存放目录，.virtualenvs目录名可自拟</span>source <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>virtualenvwrapper.sh    <span class="hljs-comment"># virtualenvwrapper.sh所在目录</span></code></pre><p><strong>3. 运行.bashrc文件</strong></p><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">source</span> ~/.bashrc</span></code></pre><p><strong>4. 创建虚拟环境</strong></p><pre><code class="hljs vala"><span class="hljs-meta"># mkvirtualenv py3-env</span></code></pre><p>也可指定虚拟环境的python版本</p><pre><code class="hljs vim"># mkvirtualenv --<span class="hljs-keyword">python</span>=/usr/bin/<span class="hljs-keyword">python3</span> <span class="hljs-keyword">py3</span>-env  </code></pre><p><strong>5. 进入虚拟环境中，然后进入到项目所在目录，安装好相应的包（如无需要，可跳过此步）</strong></p><pre><code class="hljs vala"><span class="hljs-meta">#  pip install -r requirements.txt</span></code></pre><p>虚拟环境搭建完成！</p><p><strong>常见的virtualenvwrapper命令</strong></p><ul><li>创建虚拟环境</li></ul><pre><code class="hljs vala"><span class="hljs-meta"># mkvirtualenv my_env</span></code></pre><ul><li>切换到某个虚拟环境</li></ul><pre><code class="hljs vala"><span class="hljs-meta"># workon my_env</span></code></pre><ul><li>退出当前虚拟环境</li></ul><pre><code class="hljs vala"><span class="hljs-meta"># deactivate</span></code></pre><ul><li>删除某个虚拟环境</li></ul><pre><code class="hljs vala"><span class="hljs-meta"># rmvirtualenv my_env</span></code></pre><ul><li>列出所有虚拟环境</li></ul><pre><code class="hljs vala"><span class="hljs-meta"># lsvirtualenv</span></code></pre><ul><li>进入到虚拟环境所在的目录</li></ul><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-variable">$HOME</span>/.virtualenvs</span></code></pre><h2 id="三、异常情况"><a href="#三、异常情况" class="headerlink" title="三、异常情况"></a>三、异常情况</h2><ul><li>假如source ~/.bashrc时，提示以下错误</li></ul><pre><code class="hljs gradle"># <span class="hljs-keyword">source</span> ~/.bashrc&gt;&gt; -bash: <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>virtualenvwrapper.sh: No such <span class="hljs-keyword">file</span> or directory</code></pre><p><strong>【原因】</strong><br>.bashrc文件中的virtualenvwrapper.sh所在目录错误。</p><p><strong>【解决方案】</strong><br>①查找virtualenvwrapper.sh所在目录</p><pre><code class="hljs gradle"># <span class="hljs-keyword">find</span> / -name <span class="hljs-string">&quot;virtualenvwrapper.sh&quot;</span>&gt;&gt; <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin/virtualenvwrapper.sh</code></pre><p>②把.bashrc文件的virtualenvwrapper.sh目录更改为实际所在目录</p><pre><code class="hljs awk">source <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin/virtualenvwrapper.sh    <span class="hljs-comment"># virtualenvwrapper.sh实际所在目录</span></code></pre><ul><li>假如创建虚拟环境时，提示以下错误</li></ul><pre><code class="hljs ruby"><span class="hljs-comment"># mkvirtualenv my_env</span><span class="hljs-meta">&gt;&gt;</span> <span class="hljs-symbol">ERROR:</span> virtualenvwrapper could not find virtualenv in your path</code></pre><p><strong>【解决方案】</strong><br>①查找virtualenv所在目录</p><pre><code class="hljs gradle"># <span class="hljs-keyword">find</span> / -name <span class="hljs-string">&quot;virtualenv&quot;</span>&gt;&gt; <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin/virtualenv</code></pre><p>②创建软链接</p><pre><code class="hljs gradle">#  ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/virtualenv /u</span>sr<span class="hljs-regexp">/local/</span>bin/virtualenv</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>CenteOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>centos创建python虚拟环境</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Centos7上安装MySQL</title>
     <link href="/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/"/>
     <url>/2020/01/02/Centos7%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/</url>
