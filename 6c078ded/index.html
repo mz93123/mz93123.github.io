@@ -17,10 +17,20 @@
   <meta name="description" content="">
   <meta name="author" content="Miao">
   <meta name="keywords" content="">
-  <title>分类 - 生活-见字如面</title>
+  <title>Python项目生成所有依赖包的清单requirements文件-见字如面</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -45,7 +55,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 50vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -139,16 +149,35 @@
 </nav>
 
     <div class="banner intro-2" id="background" false
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/page.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                分类 - 生活
+                Python项目生成所有依赖包的清单requirements文件
               
             </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-01-11 09:36" pubdate>
+      2020年1月11日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -161,43 +190,111 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 2 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/264368c0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">周庄游记</span>
-      <time style="float: right;">08-26</time>
-    </a>
-  
-    
-    <a href="/5afc555a/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">华谊兄弟电影世界</span>
-      <time style="float: right;">08-04</time>
-    </a>
-  
-</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Python项目生成所有依赖包的清单requirements文件</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="为当前的Python项目生成所有依赖包的清单requirements-txt文件"><a href="#为当前的Python项目生成所有依赖包的清单requirements-txt文件" class="headerlink" title="为当前的Python项目生成所有依赖包的清单requirements .txt文件"></a>为当前的Python项目生成所有依赖包的清单requirements .txt文件</h2><h4 id="生成所有依赖清单requirements-txt"><a href="#生成所有依赖清单requirements-txt" class="headerlink" title="生成所有依赖清单requirements.txt"></a>生成所有依赖清单requirements.txt</h4><p>这里需要使用到的工具叫pipreqs,先安装:</p>
+<pre><code class="hljs python">pip install pipreqs </code></pre>
+
+<p>装好之后cmd到项目路径下:</p>
+<pre><code class="hljs python">pipreqs ./</code></pre>
+
+<p>搞定~但是发现可能会有个别包漏掉,还得手工再解决一下,不过至少大头的依赖都已经列出来了</p>
+<h4 id="使用requirements-txt自动安装所有依赖包"><a href="#使用requirements-txt自动安装所有依赖包" class="headerlink" title="使用requirements.txt自动安装所有依赖包"></a>使用requirements.txt自动安装所有依赖包</h4><p>一条命令全搞定</p>
+<pre><code class="hljs python">pip install -r requirements.txt</code></pre>
 
 
 
-              </div>
+<h2 id="为当前的Python当前环境生成所有依赖包的清单requirements-txt文件"><a href="#为当前的Python当前环境生成所有依赖包的清单requirements-txt文件" class="headerlink" title="为当前的Python当前环境生成所有依赖包的清单requirements .txt文件"></a>为当前的Python当前环境生成所有依赖包的清单requirements .txt文件</h2><pre><code class="hljs pgsql">生成requirements.txt文件
+
+pip <span class="hljs-keyword">freeze</span> &gt; requirements.txt
+
+
+
+安装requirements.txt依赖
+
+pipinstall-r requirements.txt
+</code></pre>
+
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E6%B8%85%E5%8D%95requirements%E6%96%87%E4%BB%B6/">Python生成所有依赖包的清单requirements文件</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/f255ffad/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">docker</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/c3f56744/">
+                        <span class="hidden-mobile">Centeos创建python虚拟环境</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -292,9 +389,49 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
 
 
 
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
 
 
 

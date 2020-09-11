@@ -17,10 +17,20 @@
   <meta name="description" content="">
   <meta name="author" content="Miao">
   <meta name="keywords" content="">
-  <title>分类 - 生活-见字如面</title>
+  <title>CentOS7关于网络的设置-见字如面</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -45,7 +55,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 50vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -139,16 +149,35 @@
 </nav>
 
     <div class="banner intro-2" id="background" false
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/page.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                分类 - 生活
+                CentOS7关于网络的设置
               
             </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-01-02 19:15" pubdate>
+      2020年1月2日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -161,43 +190,106 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 2 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/264368c0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">周庄游记</span>
-      <time style="float: right;">08-26</time>
-    </a>
-  
-    
-    <a href="/5afc555a/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">华谊兄弟电影世界</span>
-      <time style="float: right;">08-04</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">CentOS7关于网络的设置</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>装好CentOS7后，我们一开始是上不了网的</p>
+<p><img src="/5923eb94/1.png" srcset="/img/loading.gif"></p>
+<p>这时候，可以输入命令dhclient，可以自动获取一个IP地址，再用命令ip addr查看IP</p>
+<p><img src="/5923eb94/2.png" srcset="/img/loading.gif"></p>
+<p>不过这时候获取的IP是动态的，下次重启系统后，IP地址也会变化，这时候我们可以把系统的IP设置为静态的，设置步骤如下：<br>（1）点击VMware虚拟机左上角的“编辑”，选择“虚拟网络编译器”。<br>（2）选中VMnet8（NAT模式），再点击右侧的“NAT设置”此时会看到如下界面</p>
+<p><img src="/5923eb94/3.jpg" srcset="/img/loading.gif"></p>
+<p>（3）在命令行中输入：vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+<p><img src="/5923eb94/4.png" srcset="/img/loading.gif"></p>
+<p>（4）此时会进入如下图所示界面</p>
+<p><img src="/5923eb94/5.png" srcset="/img/loading.gif"></p>
+<p>（5）将ONBOOT=no改为yes，将BOOTPROTO=dhcp改为BOOTPROTO=static,并在后面增加几行内容：<br>IPADDR=192.168.127.128<br>NETMASK=255.255.255.0<br>GATEWAY=192.168.127.2<br>DNS1=119.29.29.29</p>
+<p><img src="/5923eb94/6.png" srcset="/img/loading.gif"></p>
+<p>（6）保存后退出，然后输入命令：systemctl restart network.service来重启网络服务。</p>
+<p><img src="/5923eb94/7.png" srcset="/img/loading.gif"></p>
+<p>（7）再用ip addr查看IP,并用命令ping测试网络的连通性。</p>
+<p><img src="/5923eb94/8.png" srcset="/img/loading.gif"></p>
+<h4 id="设置ip段必须在起始和结束范围之内"><a href="#设置ip段必须在起始和结束范围之内" class="headerlink" title="设置ip段必须在起始和结束范围之内"></a>设置ip段必须在起始和结束范围之内</h4><p><img src="/5923eb94/9.png" srcset="/img/loading.gif"></p>
+<p>至此，IP即设置完毕。</p>
 
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CenteOS/">CenteOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/centos%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%BE%E7%BD%AE/">centos网络的设置</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/c5a328f6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Centos7上安装MySQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/undefined/">
+                        <span class="hidden-mobile">yum安装redis</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -292,9 +384,49 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
 
 
 
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
 
 
 

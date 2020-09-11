@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Miao">
   <meta name="keywords" content="">
-  <title>关于-见字如面</title>
+  <title>centos中安装python3.7-见字如面</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -55,7 +55,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 50vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -149,16 +149,35 @@
 </nav>
 
     <div class="banner intro-2" id="background" false
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/page.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
-                关于
+                centos中安装python3.7
               
             </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-12-30 15:29" pubdate>
+      2019年12月30日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -171,51 +190,134 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/avatar.png" srcset="/img/loading.gif"
-                   class="img-fluid" alt="avatar">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">centos中安装python3.7</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h4 id="1、安装依赖-amp-下载python3-7"><a href="#1、安装依赖-amp-下载python3-7" class="headerlink" title="1、安装依赖&amp;下载python3.7"></a><strong>1、安装依赖&amp;下载python3.7</strong></h4><pre><code class="hljs apache"><span class="hljs-comment"># 1、yum更新yum源</span>
+<span class="hljs-attribute">yum</span> update
+<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span>
+<span class="hljs-attribute">yum</span> install zlib-devel bzip<span class="hljs-number">2</span>-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make
+<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span>
+<span class="hljs-attribute">wget</span> https://www.python.org/ftp/<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.tgz</code></pre>
+
+<p><strong>2、安装Python</strong> </p>
+<pre><code class="hljs awk"><span class="hljs-comment"># 1、yum更新yum源</span>
+yum update
+<span class="hljs-comment"># 2、安装Python 3.7所需的依赖否则安装后没有pip3包</span>
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make
+<span class="hljs-comment"># 3、在官网下载所需版本，这里用的是3.7.0版本</span>
+wget https:<span class="hljs-regexp">//</span>www.python.org<span class="hljs-regexp">/ftp/</span><span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>/Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz
+　　<span class="hljs-number">2</span>、安装Python
+
+<span class="hljs-comment"># 1、解压</span>
+tar -xvf Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>.tgz
+
+<span class="hljs-comment">#2、配置编译</span>
+cd Python-<span class="hljs-number">3.7</span>.<span class="hljs-number">0</span>
+.<span class="hljs-regexp">/configure --prefix=/u</span>sr<span class="hljs-regexp">/local/</span>python3  <span class="hljs-comment"># 配置编译的的路径（这里--prefix是指定编译安装的文件夹）</span>
+.<span class="hljs-regexp">/configure --enable-optimizations  # 执行该代码后，会编译安装到 /u</span>sr<span class="hljs-regexp">/local/</span>bin/ 下，且不用添加软连接或环境变量
+make &amp;&amp; make install
+ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/python3 /u</span>sr<span class="hljs-regexp">/bin/</span>python3  <span class="hljs-comment"># 添加软连接</span>
+ln -s <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin<span class="hljs-regexp">/pip3 /u</span>sr<span class="hljs-regexp">/bin/</span>pip3
+
+<span class="hljs-comment">#3、将/usr/local/python3/bin加入PATH</span>
+[root@linux-node1 testProj]<span class="hljs-comment"># vim /etc/profile</span>
+<span class="hljs-comment">#然后在文件末尾添加</span>
+export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/python3/</span>bin
+
+[root@linux-node1 testProj]<span class="hljs-comment"># source /etc/profile # 修改完后，还需要让这个环境变量在配置信息中生效，执行命令</span></code></pre>
+
+<h4 id="3-创建python虚拟环境"><a href="#3-创建python虚拟环境" class="headerlink" title="3,创建python虚拟环境"></a>3,创建python虚拟环境</h4><pre><code class="hljs mel"><span class="hljs-number">1</span>、安装virtualenv
+
+　　　　　　yum install <span class="hljs-keyword">python</span>-virtualenv
+
+　　<span class="hljs-number">2</span>、创建<span class="hljs-keyword">python</span>虚拟环境
+
+　　　　　　virtualenv <span class="hljs-keyword">env</span>           # 执行后，在本地会生成一个与虚拟环境同名的文件夹
+
+　　　　　　如果你的系统里安装有不同版本的<span class="hljs-keyword">python</span>，可以使用--<span class="hljs-keyword">python</span>参数指定虚拟环境的<span class="hljs-keyword">python</span>版本：
+
+　　　　　　virtualenv --<span class="hljs-keyword">python</span>=/usr/local/python3/bin/python3 <span class="hljs-keyword">env</span>
+
+　　<span class="hljs-number">3</span>、启动虚拟环境　　　　
+
+　　　　　　<span class="hljs-keyword">source</span> bin/activate         # 启动虚拟环境
+
+　　　　　　deactivate                      # 退出虚拟环境</code></pre>
+
+
             </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
-
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">myl</div>
-    <div class="about-intro">人生何所求 致富和自由</div>
-    <div class="about-icons">
-      
-        
-        
-        
-        <a href="javascript:;" class="qr-trigger
-           "
-           
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/img/vx.png" srcset="/img/loading.gif" alt="qrcode" />
-          
-        </a>
-      
-    </div>
-  </div>
-</div>
-<div class="mt-5 markdown-body">
-  
-</div>
-
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CenteOS/">CenteOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/centos%E4%B8%AD%E5%AE%89%E8%A3%85python3-7/">centos中安装python3.7</a>
+                    
+                  </div>
+                
               </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/undefined/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">yum安装redis</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
             </div>
-          </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -309,6 +411,31 @@
 
 
 
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
 
 
 
